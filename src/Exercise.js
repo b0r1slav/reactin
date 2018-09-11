@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import './Exercise.css';
+
 
 class Exercise extends Component {
 

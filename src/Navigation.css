@@ -1,0 +1,17 @@
+.header {
+    padding: 15px 0 15px 0;
+    background-color: #333;
+}
+
+.header > a {
+    margin: 0;
+    padding: 15px 10px 15px 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+.header > a:hover:not(.active) {
+    background-color: #111;
+}

@@ -1,0 +1,19 @@
+.main {
+    float: left;
+    width: 85%;
+    padding: 15px;
+}
+
+.main > ol > li {
+    list-style-position: inside;
+    margin-bottom: 10px;
+}
+
+li > input {
+    display: block;
+    width: 100%;
+}
+
+details > p {
+    color: green;
+}
