@@ -6,6 +6,10 @@
     background-color: #111;
 }
 
+.activeLesson {
+    background-color: lightgrey;
+}
+
 .row::after {
     content: "";
     clear: both;

@@ -1,5 +1,8 @@
 import React from 'react';
 import './Api.css';
+import Navigation from "./Navigation";
+import Sidebar from "./Sidebar";
+import Exercise from "./Exercise";
 
 class App extends React.Component {
 
@@ -7,79 +10,24 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            data: [],
-            dataExercises: [],
             lessonId: 1
         };
     }
 
-    getData = event => {
-        const {value} = event.target.dataset;
-        const urlExercises = "https://engrexapi.000webhostapp.com/exercises/" + value;
+    handleClick = lesson => {
 
-        fetch(urlExercises)
-            .then(result => result.json())
-            .then(result => {
-                this.setState({
-                    dataExercises: result,
-                    lessonId: value
-                })
-            });
+      this.setState({
+         lessonId: lesson
+      });
     };
-
-    // Code is invoked after the component is mounted/inserted into the DOM tree.
-    componentDidMount() {
-        const url = "https://engrexapi.000webhostapp.com/lessons";
-        const urlExercises = "https://engrexapi.000webhostapp.com/exercises/" + this.state.lessonId;
-
-        fetch(url)
-            .then(result => result.json())
-            .then(result => {
-                this.setState({
-                    data: result
-                })
-            });
-
-        fetch(urlExercises)
-            .then(result => result.json())
-            .then(result => {
-                this.setState({
-                    dataExercises: result
-                })
-            });
-
-    }
 
     render() {
 
-        const {data, dataExercises} = this.state;
-
-        const result = data.map((entry, index) => {
-            return <a key={index} data-value={entry.id} onClick={this.getData} >{entry.title}</a>;
-        });
-
-        const resultExercises = dataExercises.map((entry, index) => {
-            return (
-                <li key={index}>
-                    {entry.bg}
-                    <input type="text"/>
-                    <details>
-                        <summary>Answer</summary>
-                        <p>{entry.en}</p>
-                    </details>
-                </li>
-            );
-        });
-
         return (
             <div className="row">
-                <div className="header">
-                    <a className="active" href="#lessons">Lessons</a>
-                </div>
-                <div className="menu">{result}</div>
-                <div className="main">
-                    <ol>{resultExercises}</ol>
-                </div>
+                <Navigation/>
+                <Sidebar handleClick={this.handleClick}/>
+                <Exercise lessonId={this.state.lessonId}/>
             </div>
         );
     }
