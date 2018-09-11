@@ -1,11 +1,10 @@
 .main {
     float: left;
     width: 85%;
-    padding: 15px;
+    padding: 5px 5px 5px 0;
 }
 
 .main > ol > li {
-    list-style-position: inside;
     margin-bottom: 10px;
 }
 
@@ -14,6 +13,20 @@ li > input {
     width: 100%;
 }
 
+summary {
+    padding: 5px;
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
 details > p {
     color: green;
+}
+
+@media only screen and (max-width: 768px) {
+    .main {
+        width: 100%;
+    }
 }

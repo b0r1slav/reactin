@@ -11,12 +11,3 @@
     clear: both;
     display: block;
 }
-
-@media only screen and (max-width: 768px) {
-    .header > a {
-        display: block;
-    }
-    .menu, .main {
-        width: 100%;
-    }
-}

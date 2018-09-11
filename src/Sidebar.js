@@ -27,8 +27,6 @@ class Sidebar extends Component {
         const {data, lessonId} = this.state;
 
         const result = data.map((entry, index) => {
-            
-            console.log(typeof lessonId, typeof entry.id);
             return (
                 <a key={index} data-value={entry.id} className={lessonId === entry.id ? 'activeLesson' : ''}
                    onClick={this.clickLesson} >{entry.title}</a>
