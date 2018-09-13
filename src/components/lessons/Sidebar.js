@@ -14,21 +14,10 @@ class Sidebar extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        let lessonId = 1;
-
-        if (nextProps.lessonId && nextProps.lessonId !== this.props.lessonId) {
-            lessonId = parseInt(nextProps.lessonId, 10);
-        }
-        
-        this.setState({
-            lessonId: lessonId
-        })
-    }
-
     render() {
 
-        const {data, lessonId} = this.state;
+        const {data} = this.state;
+        const {lessonId} = this.props;
 
         const result = data.map((entry, index) => {
             return (

@@ -13,10 +13,12 @@ class Exercise extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getData(nextProps.lessonId)
+        if (nextProps.lessonId !== this.props.lessonId) {
+            this.getData(nextProps.lessonId)
+        }
     }
 
-    getData = (lessonId = 1) => {
+    getData = (lessonId) => {
 
         const url = "https://engrexapi.000webhostapp.com/exercises/" + lessonId;
 
