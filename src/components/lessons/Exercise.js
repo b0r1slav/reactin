@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './Exercise.css';
+import React, { Component } from 'react';
+import '../../css/Exercise.css';
 
 
 class Exercise extends Component {
@@ -8,8 +8,7 @@ class Exercise extends Component {
         super(props);
 
         this.state = {
-            data: [],
-            lessonId: 1
+            data: []
         }
     }
 
@@ -17,7 +16,8 @@ class Exercise extends Component {
         this.getData(nextProps.lessonId)
     }
 
-    getData = lessonId => {
+    getData = (lessonId = 1) => {
+
         const url = "https://engrexapi.000webhostapp.com/exercises/" + lessonId;
 
         fetch(url)
@@ -32,6 +32,7 @@ class Exercise extends Component {
     render() {
 
         const {data} = this.state;
+
         const result = data.map((entry, index) => {
             return (
                 <li key={index}>
@@ -53,7 +54,7 @@ class Exercise extends Component {
     }
 
     componentDidMount() {
-        this.getData(this.state.lessonId);
+        this.getData(this.props.lessonId);
     }
 }
 

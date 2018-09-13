@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import './Sidebar.css';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../../css/Sidebar.css';
 
 
 class Sidebar extends Component {
@@ -13,23 +14,13 @@ class Sidebar extends Component {
         };
     }
 
-    clickLesson = event => {
-        const value = parseInt('10', event.target.dataset.value);
-
-        this.props.handleClick(value);
-
-        this.setState({
-            lessonId: value
-        });
-    };
-
     render() {
-        const {data, lessonId} = this.state;
+
+        const {data} = this.state;
 
         const result = data.map((entry, index) => {
             return (
-                <a key={index} data-value={entry.id} className={lessonId === entry.id ? 'activeLesson' : ''}
-                   onClick={this.clickLesson} >{entry.title}</a>
+            <Link key={index} to={"/lessons/" + entry.id}>{entry.title}</Link>
             )
         });
 
