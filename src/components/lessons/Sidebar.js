@@ -15,14 +15,14 @@ class Sidebar extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let id = 1;
+        let lessonId = 1;
 
-        if (nextProps.lessonId) {
-            id = parseInt('10', nextProps.lessonId);
+        if (nextProps.lessonId && nextProps.lessonId !== this.props.lessonId) {
+            lessonId = parseInt(nextProps.lessonId, 10);
         }
-
+        
         this.setState({
-            lessonId: id
+            lessonId: lessonId
         })
     }
 
