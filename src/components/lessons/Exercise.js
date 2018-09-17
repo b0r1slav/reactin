@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { url } from '../../helpers';
 import '../../css/Exercise.css';
 
 
@@ -8,21 +9,67 @@ class Exercise extends Component {
         super(props);
 
         this.state = {
-            data: []
-        }
+            data: [],
+            localData: {}
+        };
+
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.setLocalStorage = this.setLocalStorage.bind(this);
     }
+
+    setLocalStorage = (exerciseId, exerciseValue) => {
+        const lesson = 'lesson' + this.props.lessonId;
+        let localExercises = {};
+
+        if (localStorage.getItem(lesson)) {
+
+            localExercises = JSON.parse(localStorage.getItem(lesson));
+            localExercises[exerciseId] = exerciseValue;
+
+            this.setState({
+                localData: localExercises
+            });
+
+        } else {
+            localExercises[exerciseId] = exerciseValue;
+
+            this.setState({
+                localData: localExercises
+            });
+        }
+
+        localStorage.setItem(lesson, JSON.stringify(localExercises));
+    };
+
+    getLocalStorage = lessonId => {
+        const lesson = 'lesson' + lessonId;
+
+        if (localStorage.getItem(lesson)) {
+            let localExercises = JSON.parse(localStorage.getItem(lesson));
+
+            this.setState({
+                localData: localExercises
+            });
+        }
+    };
+
+    handleOnChange = event => {
+        // localStorage.removeItem('lesson' + this.props.lessonId);
+        this.setLocalStorage(event.target.dataset.id, event.target.value)
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.lessonId !== this.props.lessonId) {
-            this.getData(nextProps.lessonId)
+            this.getData(nextProps.lessonId);
+            this.getLocalStorage(nextProps.lessonId);
         }
     }
 
     getData = (lessonId) => {
 
-        const url = "https://engrexapi.000webhostapp.com/exercises/" + lessonId;
+        const uri = url('exercises/' + lessonId);
 
-        fetch(url)
+        fetch(uri)
             .then(result => result.json())
             .then(result => {
                 this.setState({
@@ -33,13 +80,13 @@ class Exercise extends Component {
 
     render() {
 
-        const {data} = this.state;
+        const {data, localData} = this.state;
 
-        const result = data.map((entry, index) => {
+        const result = data.map((entry) => {
             return (
-                <li key={index}>
+                <li key={entry.id}>
                     {entry.bg}
-                    <input type="text"/>
+                    <input type="text" data-id={entry.id} value={localData[entry.id] || ''} onChange={this.handleOnChange} />
                     <details>
                         <summary>Answer</summary>
                         <p>{entry.en}</p>
@@ -57,6 +104,7 @@ class Exercise extends Component {
 
     componentDidMount() {
         this.getData(this.props.lessonId);
+        this.getLocalStorage(this.props.lessonId);
     }
 }
 

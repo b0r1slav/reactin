@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { url } from '../../helpers';
 import '../../css/Sidebar.css';
 
 
@@ -29,9 +30,9 @@ class Sidebar extends Component {
     }
 
     componentDidMount() {
-        const url = "https://engrexapi.000webhostapp.com/lessons";
+        const uri = url('lessons');
 
-        fetch(url)
+        fetch(uri)
             .then(result => result.json())
             .then(result => {
                 this.setState({
