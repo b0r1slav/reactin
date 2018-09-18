@@ -22,7 +22,10 @@ class Sidebar extends Component {
 
         const result = data.map((entry, index) => {
             return (
-            <Link key={index} to={'/lessons/' + entry.id} className={lessonId === entry.id ? 'activeLesson': ''} >{entry.title}</Link>
+            <Link
+                key={index}
+                to={'/lessons/' + entry.id}
+                className={lessonId === entry.id ? 'activeLesson': ''} >{entry.title}</Link>
             )
         });
 

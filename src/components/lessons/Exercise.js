@@ -12,10 +12,6 @@ class Exercise extends Component {
             data: [],
             localData: {}
         };
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleOnChange = this.handleOnChange.bind(this);
-        this.setLocalStorage = this.setLocalStorage.bind(this);
     }
 
     setLocalStorage = () => {
@@ -79,9 +75,12 @@ class Exercise extends Component {
 
         const result = data.map((entry) => {
             return (
-                <li key={entry.id}>
-                    {entry.bg}
-                    <input type="text" data-id={entry.id} value={localData[entry.id] || ''} onChange={this.handleOnChange} />
+                <li key={entry.id}>{entry.bg}
+                    <input
+                        type="text"
+                        data-id={entry.id}
+                        value={localData[entry.id] || ''}
+                        onChange={this.handleOnChange} />
                     <details>
                         <summary>Answer</summary>
                         <p>{entry.en}</p>
