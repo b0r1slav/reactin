@@ -6,7 +6,7 @@
     background-color: #111;
 }
 
-.row::after {
+.container::after {
     content: "";
     clear: both;
     display: block;

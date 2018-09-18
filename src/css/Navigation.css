@@ -1,6 +1,10 @@
 .header {
     padding: 15px 0 15px 0;
     background-color: #333;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
 }
 
 .header > a {

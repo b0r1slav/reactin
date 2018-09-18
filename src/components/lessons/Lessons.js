@@ -18,7 +18,9 @@ class Lessons extends Component {
         return (
             <div>
                 <Sidebar lessonId={ this.lessonId(this.props.match.params.id) } />
-                <Exercise lessonId={ this.lessonId(this.props.match.params.id) } />
+                <div className="container">
+                    <Exercise lessonId={ this.lessonId(this.props.match.params.id) } />
+                </div>
             </div>
         );
     }

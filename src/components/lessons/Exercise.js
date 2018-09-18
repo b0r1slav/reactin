@@ -13,32 +13,16 @@ class Exercise extends Component {
             localData: {}
         };
 
+        this.handleClick = this.handleClick.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.setLocalStorage = this.setLocalStorage.bind(this);
     }
 
-    setLocalStorage = (exerciseId, exerciseValue) => {
+    setLocalStorage = () => {
         const lesson = 'lesson' + this.props.lessonId;
-        let localExercises = {};
+        const {localData} = this.state;
 
-        if (localStorage.getItem(lesson)) {
-
-            localExercises = JSON.parse(localStorage.getItem(lesson));
-            localExercises[exerciseId] = exerciseValue;
-
-            this.setState({
-                localData: localExercises
-            });
-
-        } else {
-            localExercises[exerciseId] = exerciseValue;
-
-            this.setState({
-                localData: localExercises
-            });
-        }
-
-        localStorage.setItem(lesson, JSON.stringify(localExercises));
+        localStorage.setItem(lesson, JSON.stringify(localData));
     };
 
     getLocalStorage = lessonId => {
@@ -53,9 +37,20 @@ class Exercise extends Component {
         }
     };
 
+    handleClick = () => {
+        this.setState({
+            localData: {}
+        });
+    };
+
     handleOnChange = event => {
-        // localStorage.removeItem('lesson' + this.props.lessonId);
-        this.setLocalStorage(event.target.dataset.id, event.target.value)
+        let {localData} = this.state;
+
+        localData[event.target.dataset.id] = event.target.value;
+
+        this.setState({
+            localData: localData
+        });
     };
 
     componentWillReceiveProps(nextProps) {
@@ -97,6 +92,7 @@ class Exercise extends Component {
 
         return (
             <div className="main">
+                <button onClick={this.handleClick}>reset</button>
                 <ol>{result}</ol>
             </div>
         )
@@ -105,6 +101,10 @@ class Exercise extends Component {
     componentDidMount() {
         this.getData(this.props.lessonId);
         this.getLocalStorage(this.props.lessonId);
+    }
+    
+    componentDidUpdate() {
+        this.setLocalStorage();
     }
 }
 
