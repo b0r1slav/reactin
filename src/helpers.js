@@ -6,3 +6,13 @@ export const url = (path) => {
 
     return "http://www.engrexapi.com/" + path;
 };
+
+export const makeClasses = classes => {
+
+    if (Array.isArray(classes)) {
+
+        return classes.join(' ');
+    }
+
+    return classes;
+};

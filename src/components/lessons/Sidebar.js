@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { url } from '../../helpers';
+import SideBarItem from './SideBarItem'
 import '../../css/Sidebar.css';
 
 
@@ -15,19 +16,14 @@ class Sidebar extends Component {
         };
     }
 
+    activeLesson = (lessonId, entryId) => lessonId === entryId ? 'activeLesson': '';
+
     render() {
 
         const {data} = this.state;
         const {lessonId} = this.props;
 
-        const result = data.map((entry, index) => {
-            return (
-            <Link
-                key={index}
-                to={'/lessons/' + entry.id}
-                className={lessonId === entry.id ? 'activeLesson': ''} >{entry.title}</Link>
-            )
-        });
+        const result = data.map(entry => SideBarItem(entry, this.activeLesson(lessonId, entry.id)));
 
         return <div className="menu">{result}</div>
     }
@@ -35,11 +31,10 @@ class Sidebar extends Component {
     componentDidMount() {
         const uri = url('lessons');
 
-        fetch(uri)
-            .then(result => result.json())
+        axios.get(uri)
             .then(result => {
                 this.setState({
-                    data: result
+                    data: result.data
                 })
             });
 

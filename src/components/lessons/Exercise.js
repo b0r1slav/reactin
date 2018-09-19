@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { url } from '../../helpers';
 import '../../css/Exercise.css';
+import ExerciseResetButton from "./ExerciseResetButton";
+import ExerciseItem from "./ExerciseItem";
 
 
 class Exercise extends Component {
@@ -60,11 +63,10 @@ class Exercise extends Component {
 
         const uri = url('exercises/' + lessonId);
 
-        fetch(uri)
-            .then(result => result.json())
+        axios.get(uri)
             .then(result => {
                 this.setState({
-                    data: result
+                    data: result.data
                 })
             });
     };
@@ -73,25 +75,11 @@ class Exercise extends Component {
 
         const {data, localData} = this.state;
 
-        const result = data.map((entry) => {
-            return (
-                <li key={entry.id}>{entry.bg}
-                    <input
-                        type="text"
-                        data-id={entry.id}
-                        value={localData[entry.id] || ''}
-                        onChange={this.handleOnChange} />
-                    <details>
-                        <summary>Answer</summary>
-                        <p>{entry.en}</p>
-                    </details>
-                </li>
-            );
-        });
+        const result = data.map(entry => <ExerciseItem key={entry.id} handleOnChange={this.handleOnChange} data={entry} localData={localData} />);
 
         return (
             <div className="main">
-                <button onClick={this.handleClick}>reset</button>
+                <ExerciseResetButton handler={this.handleClick} />
                 <ol>{result}</ol>
             </div>
         )

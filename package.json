@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://b0r1slav.github.io/reactin",
   "dependencies": {
+    "axios": "^0.18.0",
     "gh-pages": "^1.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
