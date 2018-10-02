@@ -5,9 +5,7 @@ import '../../css/Exercise.css';
 import ExerciseResetButton from "./ExerciseResetButton";
 import ExerciseItem from "./ExerciseItem";
 
-
 class Exercise extends Component {
-
     constructor(props) {
         super(props);
 
@@ -74,12 +72,19 @@ class Exercise extends Component {
     render() {
 
         const {data, localData} = this.state;
-
-        const result = data.map(entry => <ExerciseItem key={entry.id} handleOnChange={this.handleOnChange} data={entry} localData={localData} />);
+        const isLocalData = Object.keys(localData).length;
+        const result = data.map(entry => (
+            <ExerciseItem
+                key={entry.id}
+                handleOnChange={this.handleOnChange}
+                data={entry}
+                localData={localData}
+            />)
+        );
 
         return (
             <div className="main">
-                <ExerciseResetButton handler={this.handleClick} />
+                { isLocalData ? <ExerciseResetButton handler={this.handleClick} /> : null}
                 <ol>{result}</ol>
             </div>
         )
