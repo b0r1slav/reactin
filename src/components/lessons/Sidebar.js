@@ -4,7 +4,6 @@ import { url } from '../../helpers';
 import SideBarItem from './SideBarItem'
 import '../../css/Sidebar.css';
 
-
 class Sidebar extends Component {
 
     constructor(props) {
@@ -18,12 +17,20 @@ class Sidebar extends Component {
 
     activeLesson = (lessonId, entryId) => lessonId === entryId ? 'activeLesson': '';
 
+    handleClick = () => document.querySelector('li:first-child').scrollIntoView({alignToTop: true});
+
     render() {
 
         const {data} = this.state;
         const {lessonId} = this.props;
-
-        const result = data.map(entry => SideBarItem(entry, this.activeLesson(lessonId, entry.id)));
+        const result = data.map(entry => (
+            <SideBarItem
+                key={entry.id}
+                entry={entry}
+                activeClassName={this.activeLesson(lessonId, entry.id)}
+                handleClick={this.handleClick}
+            />)
+        );
 
         return <div className="menu">{result}</div>
     }
@@ -40,5 +47,4 @@ class Sidebar extends Component {
 
     }
 }
-
 export default Sidebar;

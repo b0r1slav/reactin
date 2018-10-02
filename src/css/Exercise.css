@@ -19,14 +19,15 @@ button {
 }
 
 .main > ol > li {
-    margin-bottom: 1px;
+    color: rgb(0, 134, 139);
+    margin-bottom: 2px;
     padding: 5px;
     list-style-position: inside;
-    border: 1px solid rgb(240,240,240);
+    border: 1px solid rgb(211,211,211);
     border-radius: 5px;
-    -webkit-box-shadow: 0 1px rgb(240,240,240);
-    -moz-box-shadow:    0 1px rgb(240,240,240);
-    box-shadow:         0 1px rgb(240,240,240);
+    -webkit-box-shadow: 0 2px rgb(240,240,240);
+    -moz-box-shadow:    0 2px rgb(240,240,240);
+    box-shadow:         0 2px rgb(240,240,240);
 }
 
 li > input {
@@ -34,7 +35,7 @@ li > input {
     width: 100%;
     border-top: none;
     border-right: none;
-    border-bottom: 1px solid rgb(211,211,211);
+    border-bottom: 1px solid rgb(232,232,232);
     border-left: none;
 }
 
