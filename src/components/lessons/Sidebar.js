@@ -27,7 +27,7 @@ class Sidebar extends Component {
             <SideBarItem
                 key={entry.id}
                 entry={entry}
-                activeClassName={this.activeLesson(lessonId, entry.id)}
+                htmlClass={this.activeLesson(lessonId, entry.id)}
                 handleClick={this.handleClick}
             />)
         );

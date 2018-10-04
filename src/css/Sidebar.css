@@ -14,13 +14,15 @@
     border-bottom: 1px solid lightgrey;
 }
 
-.menu > a:hover {
-    background-color: lightgrey;
-    cursor: pointer;
-}
-
 .activeLesson {
     background-color: lightgrey;
+}
+
+@media (min-width: 769px) {
+    .menu > a:hover {
+        background-color: lightgrey;
+        cursor: pointer;
+    }
 }
 
 @media only screen and (max-width: 768px) {

@@ -5,12 +5,12 @@ import { makeClasses } from "../../helpers";
 class SideBarItem extends Component {
 
     render() {
-        let {entry, activeClassName, handleClick} = this.props;
+        let {entry, htmlClass, handleClick} = this.props;
 
         return (
             <Link
                 to={`/lessons/${entry.id}`}
-                className={makeClasses(activeClassName)}
+                className={makeClasses(htmlClass)}
                 onClick={handleClick}>
                 {entry.title}
             </Link>
