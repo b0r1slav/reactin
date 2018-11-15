@@ -15,12 +15,12 @@ button {
 }
 
 .main > ol {
-    padding: 2px;
+    padding: 5px;
 }
 
 .main > ol > li {
     color: rgb(0, 134, 139);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     padding: 5px;
     list-style-position: inside;
     border: 1px solid rgb(211,211,211);
