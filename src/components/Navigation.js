@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../css/Navigation.css';
 
 class Navigation extends Component {
-
-    handleClick = event => {
-        if (/\/lessons/.test(window.location.href)) {
-            event.preventDefault();
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
+    
+    handleClick() {
+        let nav = document.getElementById("navBar");
+        if (nav.className === "header") {
+            nav.className += " responsive";
+        } else {
+            nav.className = "header";
         }
-    };
+}
 
     render() {
 
         return (
-            <div className="header">
-                <Link
-                    className="active"
+            <div className="header" id="navBar">
+                <NavLink
+                    activeClassName="active"
                     to="/lessons"
-                    onClick={this.handleClick}>
+                >
                     Lessons
-                </Link>
+                </NavLink>
+                <NavLink activeClassName="active" to="/words">Words</NavLink>
+                <a className="icon" onClick={this.handleClick}>
+                    &equiv;
+                </a>
             </div>
         );
     }
