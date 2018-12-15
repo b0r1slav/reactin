@@ -6,12 +6,21 @@ class Navigation extends Component {
     
     handleClick() {
         let nav = document.getElementById("navBar");
+        
         if (nav.className === "header") {
             nav.className += " responsive";
         } else {
             nav.className = "header";
         }
-}
+    }
+    
+    handleClickUri() {
+        let nav = document.getElementById("navBar");
+        
+        if ( nav.classList.contains("responsive") ) {
+            nav.className = "header";
+        }
+    }
 
     render() {
 
@@ -19,11 +28,16 @@ class Navigation extends Component {
             <div className="header" id="navBar">
                 <NavLink
                     activeClassName="active"
-                    to="/lessons"
-                >
+                    onClick={this.handleClickUri}
+                    to="/lessons">
                     Lessons
                 </NavLink>
-                <NavLink activeClassName="active" to="/words">Words</NavLink>
+                <NavLink 
+                    activeClassName="active" 
+                    onClick={this.handleClickUri} 
+                    to="/words">
+                    Words
+                </NavLink>
                 <a className="icon" onClick={this.handleClick}>
                     &equiv;
                 </a>

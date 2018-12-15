@@ -13,9 +13,9 @@ class Words extends Component {
         };
     }
 
-    getData = () => {
+    getData = (lesson = 1) => {
 
-        const uri = url('words/1');
+        const uri = url(`words/${lesson}/20`);
 
         axios.get(uri)
             .then(result => {
@@ -45,7 +45,7 @@ class Words extends Component {
     }
 
     componentDidMount() {
-        this.getData();
+        this.getData(parseInt(this.props.match.params.id, 10));
     }
 }
 
