@@ -16,7 +16,7 @@ class Exercise extends Component {
     }
 
     setLocalStorage = () => {
-        const lesson = 'lesson' + this.props.lessonId;
+        const lesson = 'lesson' + parseInt(this.props.match.params.id, 10);
         const {localData} = this.state;
 
         localStorage.setItem(lesson, JSON.stringify(localData));
@@ -50,14 +50,14 @@ class Exercise extends Component {
         });
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.lessonId !== this.props.lessonId) {
-            this.getData(nextProps.lessonId);
-            this.getLocalStorage(nextProps.lessonId);
-        }
-    }
+    //~ componentWillReceiveProps(nextProps) {
+        //~ if (nextProps.lessonId !== this.props.lessonId) {
+            //~ this.getData(nextProps.lessonId);
+            //~ this.getLocalStorage(nextProps.lessonId);
+        //~ }
+    //~ }
 
-    getData = (lessonId) => {
+    getData = (lessonId = 1) => {
 
         const uri = url('exercises/' + lessonId);
 
@@ -91,8 +91,8 @@ class Exercise extends Component {
     }
 
     componentDidMount() {
-        this.getData(this.props.lessonId);
-        this.getLocalStorage(this.props.lessonId);
+        this.getData(parseInt(this.props.match.params.id, 10));
+        this.getLocalStorage(parseInt(this.props.match.params.id, 10));
     }
     
     componentDidUpdate() {
