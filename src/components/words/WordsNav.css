@@ -4,6 +4,7 @@
 }
 
 #wordsNavList > li > a {
+    display: block;
     text-decoration: none;
     color: #000;
 }

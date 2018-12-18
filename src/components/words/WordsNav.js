@@ -32,7 +32,8 @@ class WordsNav extends Component {
         const items = Math.ceil(rowsCount / 20);
         
         for (let i = 1; i <= items; i++) {
-            elements.push(<WordsNavItem key={i} entry={i}/>)
+            let data = {url: `/words/${i}`, content: `Lesson ${i}`};
+            elements.push(<WordsNavItem key={i} item={data}/>);
         }
 
         return (
