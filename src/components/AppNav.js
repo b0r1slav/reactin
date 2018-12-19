@@ -5,15 +5,16 @@ class AppNav extends Component {
 
     render() {
         
-        const result = [
+        const items = [
             <WordsNavItem key={1} item={{url: `/lessons`, content: 'Lessons'}} />,
-            <WordsNavItem key={2} item={{url: `/words`, content: 'Words'}} />
+            <WordsNavItem key={2} item={{url: `/words`, content: 'Words'}} />,
+            <WordsNavItem key={3} item={{url: `/phrases`, content: 'Phrases'}} />
             ];
 
         return (
             <div className="container">
                 <div className="main">
-                    <ol id="wordsNavList">{result}</ol>
+                    <ol id="wordsNavList">{items}</ol>
                 </div>
             </div>
         )

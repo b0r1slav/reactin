@@ -4,7 +4,7 @@ import { url } from '../../helpers';
 import WordsNavItem from '../words/WordsNavItem';
 import '../words/WordsNav.css';
 
-class SentencesNav extends Component {
+class ExerciseNav extends Component {
     
     constructor(props) {
         super(props);
@@ -13,6 +13,19 @@ class SentencesNav extends Component {
             data: []
         };
     }
+    
+    getData = () => {
+        
+        const uri = url('/lessons');
+
+        axios.get(uri)
+            .then(result => {
+                this.setState({
+                    data: result.data
+            })
+        });
+        
+    };
 
     render() {
         
@@ -34,16 +47,8 @@ class SentencesNav extends Component {
     }
 
     componentDidMount() {
-        const uri = url('lessons');
-
-        axios.get(uri)
-            .then(result => {
-                this.setState({
-                    data: result.data
-                })
-            });
-
+        this.getData();
     }
 }
 
-export default SentencesNav;
+export default ExerciseNav;

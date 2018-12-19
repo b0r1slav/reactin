@@ -38,6 +38,12 @@ class Navigation extends Component {
                     to="/words">
                     Words
                 </NavLink>
+                <NavLink 
+                    activeClassName="active" 
+                    onClick={this.handleClickUri} 
+                    to="/phrases">
+                    Phrases
+                </NavLink>
                 <a className="icon" onClick={this.handleClick}>
                     &equiv;
                 </a>

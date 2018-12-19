@@ -8,14 +8,17 @@ class Words extends Component {
     constructor(props) {
         super(props);
 
+        this.module = 'words';
         this.state = {
             data: [],
         };
+        
+        this.getData = this.getData.bind(this);
     }
 
     getData = (lesson = 1) => {
-
-        const uri = url(`words/${lesson}/20`);
+        
+        const uri  = url(`/${this.module}/${lesson}/20`);
 
         axios.get(uri)
             .then(result => {

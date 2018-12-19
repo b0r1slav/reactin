@@ -59,7 +59,7 @@ class Exercise extends Component {
 
     getData = (lessonId = 1) => {
 
-        const uri = url('exercises/' + lessonId);
+        const uri = url('/exercises/' + lessonId);
 
         axios.get(uri)
             .then(result => {

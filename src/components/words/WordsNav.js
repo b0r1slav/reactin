@@ -9,14 +9,18 @@ class WordsNav extends Component {
     constructor(props) {
         super(props);
 
+        this.module = 'words';
+        this.dataUrl = '/words/1';
         this.state = {
             rowsCount: [],
         };
+        
+        this.getData = this.getData.bind(this);
     }
 
     getData = () => {
 
-        const uri = url('words/1');
+        const uri = url(this.dataUrl);
 
         axios.get(uri)
             .then(result => {
@@ -32,7 +36,7 @@ class WordsNav extends Component {
         const items = Math.ceil(rowsCount / 20);
         
         for (let i = 1; i <= items; i++) {
-            let data = {url: `/words/${i}`, content: `Lesson ${i}`};
+            let data = {url: `/${this.module}/${i}`, content: `Lesson ${i}`};
             elements.push(<WordsNavItem key={i} item={data}/>);
         }
 
