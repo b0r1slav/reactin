@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { url } from '../../helpers';
 import SideBarItem from './SideBarItem'
-import '../../css/Sidebar.css';
+import './Sidebar.css';
 
 class Sidebar extends Component {
 

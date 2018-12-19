@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { url } from '../../helpers';
-import '../../css/Exercise.css';
+import './Exercise.css';
 import ExerciseResetButton from "./ExerciseResetButton";
 import ExerciseItem from "./ExerciseItem";
 

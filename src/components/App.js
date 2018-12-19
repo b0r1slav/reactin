@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+import './App.css';
 import Navigation from "./Navigation";
 import Routes from "./Routes";
 
