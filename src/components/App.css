@@ -13,3 +13,7 @@
     clear: both;
     display: block;
 }
+
+.visited {
+    background-color: #49ff3317;
+}

@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 class WordsNavItem extends Component {
 
     render() {
-        let {item} = this.props;
+        let {url, content, id} = this.props;
+        let className = this.props.className ? this.props.className : '';
 
         return (
-            <li>
+            <li className={className}>
                 <Link
-                    to={item.url}>
-                    {item.content}
+                    to={url}
+                    data-id={id}>
+                    {content}
                 </Link>
             </li>
         );

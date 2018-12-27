@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { url } from '../../helpers';
 import WordsNavItem from '../words/WordsNavItem';
+import ExerciseResetButton from "./ExerciseResetButton";
 import '../words/WordsNav.css';
 
 class ExerciseNav extends Component {
@@ -10,7 +11,8 @@ class ExerciseNav extends Component {
         super(props);
 
         this.state = {
-            data: []
+            data: [],
+            visited: []
         };
     }
     
@@ -26,20 +28,37 @@ class ExerciseNav extends Component {
         });
         
     };
+    
+    handleClick = () => {
+        let {visited} = this.state;
+        
+        visited.forEach(function(key) {
+            localStorage.removeItem(key)
+        });
+        
+        this.setState({ visited: [] });
+    };
+    
+    addClassVisited = (id) => localStorage.getItem(`lesson${id}`) ? 'visited' : '';
 
     render() {
         
-        const {data} = this.state;
+        const {data, visited} = this.state;
+        const resetButton = visited.length ? <ExerciseResetButton handler={this.handleClick} /> : null;
         const result = data.map(entry => (
             <WordsNavItem
                 key={entry.id}
-                item={{url: `/lessons/${entry.id}`, content: entry.title}}
+                id={entry.id}
+                className={this.addClassVisited(entry.id)}
+                url={`/lessons/${entry.id}`}
+                content={entry.title}
             />)
         );
 
         return (
             <div className="container">
                 <div className="main">
+                    {resetButton}
                     <ol id="wordsNavList">{result}</ol>
                 </div>
             </div>
@@ -47,6 +66,14 @@ class ExerciseNav extends Component {
     }
 
     componentDidMount() {
+        let local = Object.keys(localStorage);
+        let lessons = local.filter(function(key) {
+            return key.includes('lesson');
+        });
+        this.setState({
+            visited: lessons
+        });
+        
         this.getData();
     }
 }

@@ -6,9 +6,9 @@ class AppNav extends Component {
     render() {
         
         const items = [
-            <WordsNavItem key={1} item={{url: `/lessons`, content: 'Lessons'}} />,
-            <WordsNavItem key={2} item={{url: `/words`, content: 'Words'}} />,
-            <WordsNavItem key={3} item={{url: `/phrases`, content: 'Phrases'}} />
+            <WordsNavItem key={1} url='/lessons' content='Lessons' />,
+            <WordsNavItem key={2} url='/words' content='Words' />,
+            <WordsNavItem key={3} url='/phrases' content='Phrases' />
             ];
 
         return (

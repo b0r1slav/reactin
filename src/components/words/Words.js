@@ -27,6 +27,24 @@ class Words extends Component {
                 })
             });
     };
+    
+    setVisited = (id) => {
+        let visited = localStorage.getItem(this.module);
+        let local = [];
+        if (visited) {
+            
+            local = JSON.parse(visited);
+            if ( local.indexOf(id) > -1 ) {
+                return;
+            } else {
+                local.push(id);
+                localStorage.setItem(this.module, JSON.stringify(local));
+            }
+            
+        } else {
+            localStorage.setItem(this.module, JSON.stringify([id]));
+        }
+    };
 
     render() {
         const {data} = this.state;
@@ -48,7 +66,9 @@ class Words extends Component {
     }
 
     componentDidMount() {
-        this.getData(parseInt(this.props.match.params.id, 10));
+        const param = parseInt(this.props.match.params.id, 10);
+        this.getData(param);
+        this.setVisited(param)
     }
 }
 

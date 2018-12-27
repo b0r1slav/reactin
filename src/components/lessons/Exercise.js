@@ -50,13 +50,6 @@ class Exercise extends Component {
         });
     };
 
-    //~ componentWillReceiveProps(nextProps) {
-        //~ if (nextProps.lessonId !== this.props.lessonId) {
-            //~ this.getData(nextProps.lessonId);
-            //~ this.getLocalStorage(nextProps.lessonId);
-        //~ }
-    //~ }
-
     getData = (lessonId = 1) => {
 
         const uri = url('/exercises/' + lessonId);
@@ -72,7 +65,7 @@ class Exercise extends Component {
     render() {
 
         const {data, localData} = this.state;
-        const isLocalData = Object.keys(localData).length;
+        const resetButton = Object.keys(localData).length ? <ExerciseResetButton handler={this.handleClick} /> : null;
         const result = data.map(entry => (
             <ExerciseItem
                 key={entry.id}
@@ -84,7 +77,7 @@ class Exercise extends Component {
 
         return (
             <div className="main">
-                { isLocalData ? <ExerciseResetButton handler={this.handleClick} /> : null}
+                {resetButton}
                 <ol>{result}</ol>
             </div>
         )
