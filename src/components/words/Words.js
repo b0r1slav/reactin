@@ -17,15 +17,24 @@ class Words extends Component {
     }
 
     getData = (lesson = 1) => {
-        
         const uri  = url(`/${this.module}/${lesson}/20`);
-
-        axios.get(uri)
-            .then(result => {
-                this.setState({
-                    data: result.data.data
-                })
+        const localData = JSON.parse( localStorage.getItem(`${this.module}Data`) );
+        const localKey = `lesson${lesson}`;
+        
+        if ( localData && localData[localKey] ) {
+            this.setState({
+                    data: localData[localKey]
             });
+        } else {
+            axios.get(uri)
+                .then(result => {
+                    this.setLocalData(result.data.data, localKey, localData);
+                    
+                    this.setState({
+                        data: result.data.data
+                    });
+                });
+        }
     };
     
     setVisited = (id) => {
@@ -44,6 +53,16 @@ class Words extends Component {
         } else {
             localStorage.setItem(this.module, JSON.stringify([id]));
         }
+    };
+    
+    setLocalData = (apiData, localKey, localData) => {
+        if (localData) {
+            localData[localKey] = apiData;
+        } else {
+            localData = {[localKey]: apiData};
+        }
+        
+        localStorage.setItem( `${this.module}Data`, JSON.stringify(localData) );
     };
 
     render() {

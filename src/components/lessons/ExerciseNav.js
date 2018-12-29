@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { url } from '../../helpers';
+import { url, getModuleVersion } from '../../helpers';
 import WordsNavItem from '../words/WordsNavItem';
 import ExerciseResetButton from "./ExerciseResetButton";
 import '../words/WordsNav.css';
@@ -10,6 +10,7 @@ class ExerciseNav extends Component {
     constructor(props) {
         super(props);
 
+        this.module = 'exercises';
         this.state = {
             data: [],
             visited: []
@@ -19,14 +20,42 @@ class ExerciseNav extends Component {
     getData = () => {
         
         const uri = url('/lessons');
-
-        axios.get(uri)
-            .then(result => {
-                this.setState({
-                    data: result.data
-            })
+        const storageVersion = parseFloat( localStorage.getItem(`${this.module}Version`) );
+        const appVersion = getModuleVersion(this.module);
+        const exercisesNav = JSON.parse( localStorage.getItem(`${this.module}Nav`) );
+        
+        if ( storageVersion && storageVersion === appVersion && exercisesNav ) {
+            
+            this.setState({
+                data: exercisesNav
+            });
+        } else {
+            axios.get(uri)
+                .then(result => {
+                    this.setExercisesNav(appVersion, result.data);
+                
+                    this.setState({
+                        data: result.data
+                    });
+                });
+        }
+        
+    };
+    
+    setExercisesNav = (appVersion, exercisesNav) => {
+        localStorage.setItem(`${this.module}Version`, appVersion);
+        localStorage.setItem( `${this.module}Nav`, JSON.stringify(exercisesNav) );
+    };
+    
+    setVisited = () => {
+        let local = Object.keys(localStorage);
+        let lessons = local.filter(function(key) {
+            return key.includes('lesson');
         });
         
+        this.setState({
+            visited: lessons
+        });
     };
     
     handleClick = () => {
@@ -66,13 +95,7 @@ class ExerciseNav extends Component {
     }
 
     componentDidMount() {
-        let local = Object.keys(localStorage);
-        let lessons = local.filter(function(key) {
-            return key.includes('lesson');
-        });
-        this.setState({
-            visited: lessons
-        });
+        this.setVisited();
         
         this.getData();
     }

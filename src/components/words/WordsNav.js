@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { url } from '../../helpers';
+import { url, getModuleVersion } from '../../helpers';
 import WordsNavItem from './WordsNavItem';
 import ExerciseResetButton from "../lessons/ExerciseResetButton";
 import './WordsNav.css';
@@ -21,23 +21,47 @@ class WordsNav extends Component {
     }
 
     getData = () => {
-
         const uri = url(this.dataUrl);
-
-        axios.get(uri)
-            .then(result => {
-                this.setState({
-                    rowsCount: result.data.rows.rowsCount
-                })
+        const storageVersion = parseFloat( localStorage.getItem(`${this.module}Version`) );
+        const appVersion = getModuleVersion(this.module);
+        const rowsCount = localStorage.getItem(`${this.module}Nav`);
+        
+        if ( storageVersion && storageVersion === appVersion && rowsCount ) {
+            
+            this.setState({
+                rowsCount: rowsCount
             });
+        } else {
+            axios.get(uri)
+                .then(result => {
+                    this.setWordsNav(appVersion, result.data.rows.rowsCount);
+                
+                    this.setState({
+                        rowsCount: result.data.rows.rowsCount
+                    });
+                });
+        }
     };
     
     handleClick = () => {
-        let {visited} = this.state;
-        
         localStorage.removeItem(this.module);
         
         this.setState({ visited: [] });
+    };
+    
+    setVisited = () => {
+        const local = localStorage.getItem(this.module);
+        const visited = local ? JSON.parse(local) : [];
+        
+        this.setState({
+            visited: visited
+        });
+    };
+    
+    setWordsNav = (appVersion, rowsCount) => {
+        localStorage.setItem(`${this.module}Version`, appVersion);
+        localStorage.setItem(`${this.module}Nav`, rowsCount);
+        
     };
     
     addClassVisited = id => this.state.visited.indexOf(id) > -1 ? 'visited' : '';
@@ -69,11 +93,8 @@ class WordsNav extends Component {
 
     componentDidMount() {
         this.getData();
-        const local = localStorage.getItem(this.module);
-        const visited = local ? JSON.parse(local) : [];
-        this.setState({
-            visited: visited
-        });
+        this.setVisited();
+        
     }
 }
 

@@ -1,10 +1,17 @@
+import * as AppConfig from './appconfig';
+
+export const getModuleVersion = (module) => {
+    
+    return AppConfig[`${module}Version`];
+};
+
 export const url = (path) => {
 
     if (process.env.NODE_ENV === 'production') {
-        return "https://engrexapi.herokuapp.com" + path;
+        return AppConfig.prodUrl + path;
     }
 
-    return "http://www.engrexapi.com" + path;
+    return AppConfig.devUrl + path;
 };
 
 export const makeClasses = classes => {

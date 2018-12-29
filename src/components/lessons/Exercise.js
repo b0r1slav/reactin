@@ -9,11 +9,43 @@ class Exercise extends Component {
     constructor(props) {
         super(props);
 
+        this.module = 'exercises';
         this.state = {
             data: [],
             localData: {}
         };
     }
+    
+    getData = (lessonId = 1) => {
+        const uri = url(`/exercises/${lessonId}`);
+        const localData = JSON.parse( localStorage.getItem(`${this.module}Data`) );
+        const localKey = `lesson${lessonId}`;
+        
+        if ( localData && localData[localKey] ) {
+            this.setState({
+                    data: localData[localKey]
+            });
+        } else {
+            axios.get(uri)
+                .then(result => {
+                    this.setLocalData(result.data, localKey, localData);
+                    
+                    this.setState({
+                        data: result.data
+                    });
+                });
+        }
+    };
+    
+    setLocalData = (apiData, localKey, localData) => {
+        if (localData) {
+            localData[localKey] = apiData;
+        } else {
+            localData = {[localKey]: apiData};
+        }
+        
+        localStorage.setItem( `${this.module}Data`, JSON.stringify(localData) );
+    };
 
     setLocalStorage = () => {
         const lesson = 'lesson' + parseInt(this.props.match.params.id, 10);
@@ -48,18 +80,6 @@ class Exercise extends Component {
         this.setState({
             localData: localData
         });
-    };
-
-    getData = (lessonId = 1) => {
-
-        const uri = url('/exercises/' + lessonId);
-
-        axios.get(uri)
-            .then(result => {
-                this.setState({
-                    data: result.data
-                })
-            });
     };
 
     render() {
