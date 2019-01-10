@@ -5,6 +5,8 @@ class Phrases extends Words {
         super(props);
 
         this.module = 'phrases';
+        this.moduleUrl = '/phrases/';
+        this.itemsCount = 20;
     }
 }
 

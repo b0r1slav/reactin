@@ -21,6 +21,13 @@ class Navigation extends Component {
             nav.className = "header";
         }
     }
+    
+    //~ <NavLink 
+                    //~ activeClassName="active" 
+                    //~ onClick={this.handleClickUri} 
+                    //~ to="/competition">
+                    //~ Competition
+                //~ </NavLink>
 
     render() {
 

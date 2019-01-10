@@ -7,6 +7,13 @@ import WordsNav from "./words/WordsNav";
 import Words from "./words/Words";
 import Phrases from "./phrases/Phrases";
 import PhrasesNav from "./phrases/PhrasesNav";
+//~ import CompetitionNav from "./competitions/CompetitionNav";
+//~ import WordsCompetitionNav from "./competitions/WordsCompetitionNav";
+//~ import WordsCompetition from "./competitions/WordsCompetition";
+
+//~ <Route path="/competition/:id" component={WordsCompetitionNav} />
+//~ <Route path="/competition" component={CompetitionNav} />
+//~ <Route path="/words-competition/:id" component={WordsCompetition} />
 
 const Routes = () => (
     <Switch>

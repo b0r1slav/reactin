@@ -6,7 +6,8 @@ class PhrasesNav extends WordsNav {
         super(props);
 
         this.module = 'phrases';
-        this.dataUrl = '/phrases/1'
+        this.moduleUrl = '/phrases/';
+        this.dataUrl = '/phrases/1/1'
     }
 }
 

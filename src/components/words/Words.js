@@ -9,15 +9,15 @@ class Words extends Component {
         super(props);
 
         this.module = 'words';
+        this.moduleUrl = '/words/';
+        this.itemsCount = 20;
         this.state = {
             data: [],
         };
-        
-        this.getData = this.getData.bind(this);
     }
 
     getData = (lesson = 1) => {
-        const uri  = url(`/${this.module}/${lesson}/20`);
+        const uri  = url(`${this.moduleUrl}${lesson}/${this.itemsCount}`);
         const localData = JSON.parse( localStorage.getItem(`${this.module}Data`) );
         const localKey = `lesson${lesson}`;
         

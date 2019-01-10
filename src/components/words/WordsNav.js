@@ -11,7 +11,8 @@ class WordsNav extends Component {
         super(props);
 
         this.module = 'words';
-        this.dataUrl = '/words/1';
+        this.moduleUrl = '/words/';
+        this.dataUrl = '/words/1/1';
         this.state = {
             rowsCount: [],
             visited: []
@@ -76,7 +77,7 @@ class WordsNav extends Component {
             elements.push(<WordsNavItem 
                             key={i}
                             className={this.addClassVisited(i)} 
-                            url={`/${this.module}/${i}`} 
+                            url={`${this.moduleUrl}${i}`} 
                             content={`Lesson ${i}`} />
             );
         }
