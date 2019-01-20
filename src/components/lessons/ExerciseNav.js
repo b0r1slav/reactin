@@ -69,6 +69,21 @@ class ExerciseNav extends Component {
     };
     
     addClassVisited = (id) => localStorage.getItem(`lesson${id}`) ? 'visited' : '';
+    
+    handleAnswer = (id) => {
+        let answer = [];
+        let item = localStorage.getItem(`lesson${id}`);
+        
+        if (item) {
+            let data = JSON.parse(item);
+            
+            answer = Object.keys(data).filter(function(key){
+                return key.indexOf('answer') > -1;
+            });
+        }
+        
+        return answer;
+    };
 
     render() {
         
@@ -81,6 +96,8 @@ class ExerciseNav extends Component {
                 className={this.addClassVisited(entry.id)}
                 url={`/lessons/${entry.id}`}
                 content={entry.title}
+                quantity={entry.quantity}
+                answer={this.handleAnswer(entry.id)}
             />)
         );
 
@@ -96,7 +113,6 @@ class ExerciseNav extends Component {
 
     componentDidMount() {
         this.setVisited();
-        
         this.getData();
     }
 }

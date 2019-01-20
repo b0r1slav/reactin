@@ -8,3 +8,9 @@
     text-decoration: none;
     color: #000;
 }
+
+#wordsNavList > li > span.score {
+    position: absolute;
+    bottom: 4px;
+    right: 5px;
+}

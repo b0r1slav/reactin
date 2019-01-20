@@ -12,7 +12,7 @@ class Exercise extends Component {
         this.module = 'exercises';
         this.state = {
             data: [],
-            localData: {}
+            localData: {},
         };
     }
     
@@ -71,6 +71,16 @@ class Exercise extends Component {
             localData: {}
         });
     };
+    
+    handleClickAnswer = (event) => {
+        let {localData} = this.state;
+
+        localData[`answer${event.target.dataset.id}`] = 1;
+        
+        this.setState({     
+            localData: localData
+        });
+    };
 
     handleOnChange = event => {
         let {localData} = this.state;
@@ -90,6 +100,7 @@ class Exercise extends Component {
             <ExerciseItem
                 key={entry.id}
                 handleOnChange={this.handleOnChange}
+                handleClickAnswer={this.handleClickAnswer}
                 data={entry}
                 localData={localData}
             />)
