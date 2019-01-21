@@ -56,9 +56,10 @@
 
 @media screen and (max-width: 600px) {
     .header a:not(.active) {display: none;}
-    .header a.icon {
+    .header button.icon {
         float: right;
         display: block;
+        background-color: #333333;
     }
 }
 

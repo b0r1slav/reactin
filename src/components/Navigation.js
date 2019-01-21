@@ -51,9 +51,9 @@ class Navigation extends Component {
                     to="/phrases">
                     Phrases
                 </NavLink>
-                <a className="icon" onClick={this.handleClick}>
+                <button className="icon" onClick={this.handleClick}>
                     &equiv;
-                </a>
+                </button>
             </div>
         );
     }
