@@ -4,6 +4,7 @@ import { url } from '../../helpers';
 import './Exercise.css';
 import ExerciseResetButton from "./ExerciseResetButton";
 import ExerciseItem from "./ExerciseItem";
+import Navigation from "../Navigation";
 
 class Exercise extends Component {
     constructor(props) {
@@ -107,10 +108,13 @@ class Exercise extends Component {
         );
 
         return (
-            <div className="main">
-                {resetButton}
-                <ol>{result}</ol>
-            </div>
+			<div className="container">
+				<Navigation title={`lesson ${this.props.match.params.id}`} previousUrl='/lessons'/>
+				<div className="main">
+					{resetButton}
+					<ol>{result}</ol>
+				</div>
+			</div>
         )
     }
 

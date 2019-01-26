@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { url, getModuleVersion } from '../../helpers';
 import WordsNavItem from './WordsNavItem';
-import ExerciseResetButton from "../lessons/ExerciseResetButton";
+import ExerciseResetButton from '../lessons/ExerciseResetButton';
+import Navigation from '../Navigation';
 import './WordsNav.css';
 
 class WordsNav extends Component {
@@ -84,6 +85,7 @@ class WordsNav extends Component {
 
         return (
             <div className="container">
+            	<Navigation title={this.module} previousUrl='/' />
                 <div className="main">
                     {resetButton}
                     <ol id="wordsNavList">{elements}</ol>

@@ -1,61 +1,17 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import {Link} from 'react-router-dom';
 import './Navigation.css';
 
-class Navigation extends Component {
-    
-    handleClick() {
-        let nav = document.getElementById("navBar");
-        
-        if (nav.className === "header") {
-            nav.className += " responsive";
-        } else {
-            nav.className = "header";
-        }
-    }
-    
-    handleClickUri() {
-        let nav = document.getElementById("navBar");
-        
-        if ( nav.classList.contains("responsive") ) {
-            nav.className = "header";
-        }
-    }
-    
-    //~ <NavLink 
-                    //~ activeClassName="active" 
-                    //~ onClick={this.handleClickUri} 
-                    //~ to="/competition">
-                    //~ Competition
-                //~ </NavLink>
-
-    render() {
-
-        return (
-            <div className="header" id="navBar">
-                <NavLink
-                    activeClassName="active"
-                    onClick={this.handleClickUri}
-                    to="/lessons">
-                    Lessons
-                </NavLink>
-                <NavLink 
-                    activeClassName="active" 
-                    onClick={this.handleClickUri} 
-                    to="/words">
-                    Words
-                </NavLink>
-                <NavLink 
-                    activeClassName="active" 
-                    onClick={this.handleClickUri} 
-                    to="/phrases">
-                    Phrases
-                </NavLink>
-                <button className="icon" onClick={this.handleClick}>
-                    &equiv;
-                </button>
-            </div>
-        );
-    }
-}
+const Navigation = (props) => {
+	const previousUrl = props.previousUrl ? <Link to={props.previousUrl} className="nav-item">&larr;</Link> : null;
+	
+	return (
+		<div className="header" id="navBar">
+			{previousUrl}
+			<span className="nav-item">
+				{props.title.charAt(0).toUpperCase() + props.title.slice(1)}
+            </span>
+		</div>
+	);
+};
 export default Navigation;

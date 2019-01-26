@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WordsNavItem from './words/WordsNavItem';
+import Navigation from './Navigation';
 
 class AppNav extends Component {
 
@@ -14,6 +15,7 @@ class AppNav extends Component {
 
         return (
             <div className="container">
+            	<Navigation title='BgLearningEn' />
                 <div className="main">
                     <ol id="wordsNavList">{items}</ol>
                 </div>

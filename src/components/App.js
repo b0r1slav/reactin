@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from "./Navigation";
 import Routes from "./Routes";
 
 
@@ -10,7 +9,6 @@ class App extends Component {
 
         return (
             <div>
-                <Navigation />
                 <Routes />
             </div>
         );

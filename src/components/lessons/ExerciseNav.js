@@ -3,6 +3,7 @@ import axios from 'axios';
 import { url, getModuleVersion } from '../../helpers';
 import WordsNavItem from '../words/WordsNavItem';
 import ExerciseResetButton from "./ExerciseResetButton";
+import Navigation from "../Navigation";
 import '../words/WordsNav.css';
 
 class ExerciseNav extends Component {
@@ -103,6 +104,7 @@ class ExerciseNav extends Component {
 
         return (
             <div className="container">
+            	<Navigation title={this.module} previousUrl='/' />
                 <div className="main">
                     {resetButton}
                     <ol id="wordsNavList">{result}</ol>

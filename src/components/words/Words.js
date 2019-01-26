@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { url } from '../../helpers';
 import WordsItem from "./WordsItem";
+import Navigation from "../Navigation";
 
 class Words extends Component {
     
@@ -77,6 +78,7 @@ class Words extends Component {
 
         return (
             <div className="container">
+            	<Navigation title={`lesson ${this.props.match.params.id}`} previousUrl={this.moduleUrl} />
                 <div className="main">
                     <ol>{result}</ol>
                 </div>
